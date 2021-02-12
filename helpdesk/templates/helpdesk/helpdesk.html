@@ -1,0 +1,15 @@
+{% extends 'helpdesk/base.html' %}
+
+{% block title %}Detail{% endblock title %}
+
+{% block body %}
+{% for ticket in tickets %}
+    <h1>{{ticket.owner}}</h1>
+    <h1>{{ticket.code}}</h1>
+    <h1>{{ticket.category.title}}</h1>
+    <h1>{{ticket.subject}}</h1>
+    <h1>{{ticket.description}}</h1>
+</div>
+
+{% endfor %}
+{% endblock body %}
