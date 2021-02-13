@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from .forms import MyUserCreationForm
 from .models import MyUser, Account
 
@@ -16,12 +17,17 @@ def create_user(request):
                 first_name = request.POST['first_name'],
             )
             new_user.save()
-            return redirect('helpdesk:index')
+            message = messages.success(request, 'Usuario, creado')
+            return redirect('helpdesk:index', messages=message)
 
     context = {
         'form':form
     }
     return render(request, 'account/create.html', context)
+
+
+def login(request):
+    pass
 
 @login_required
 def detail(request):

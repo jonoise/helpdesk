@@ -57,7 +57,7 @@ class Migration(migrations.Migration):
             name='Account',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image', models.ImageField(default='', upload_to=account.models.account_image_upload_url)),
+                ('image', models.ImageField(default='', upload_to=account.models.account_image_url)),
                 ('owner', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='account')),
             ],
         ),
