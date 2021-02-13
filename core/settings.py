@@ -41,6 +41,7 @@ AUTH_USER_MODEL = 'account.MyUser'
 INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'helpdesk.apps.HelpdeskConfig',
+    'widget_tweaks',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

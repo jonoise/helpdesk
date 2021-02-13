@@ -8,7 +8,6 @@ class MyUserCreationForm(UserCreationForm):
         fields = ('username', 'password1', 'password2', 'first_name')
 
 class RolForm(forms.ModelForm):
-    
     class Meta:
         model = Rol
         fields = ("is_regular", "is_agent")

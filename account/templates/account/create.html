@@ -1,4 +1,8 @@
-{% extends 'helpdesk/base.html' %} {% block title %}{% endblock title %}
+{% extends 'helpdesk/base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Account Creation{% endblock title %}
+
 {% block body %}
 <div class="container">
   <div class="s1">
@@ -6,6 +10,14 @@
       <h1>Account Registration</h1>
     </div>
     <div class="body">
+      <form method="POST">
+        {% csrf_token %}
+        {% render_field form.username placeholder="Username"%}
+        {% render_field form.password1 placeholder="Password"%}
+        {% render_field form.password2 placeholder="Confirm Password"%}
+        {% render_field form.first_name placeholder="Nombre propio"%}
+        <input type="submit" value="Crear">
+      </form>
     </div>
   </div>
 </div>
