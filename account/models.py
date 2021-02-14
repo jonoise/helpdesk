@@ -20,6 +20,7 @@ class MyUser(AbstractUser):
 class Account(models.Model):
     owner = models.OneToOneField(MyUser, verbose_name='account', on_delete=models.CASCADE)
     image = models.ImageField(upload_to=account_image_url, default=default_image_url, blank=True)
+    description = models.CharField(max_length=90, blank=True)
     facebook = models.URLField(blank=True)
     instagram = models.URLField(blank=True)
     twitter = models.URLField(blank=True)
