@@ -20,7 +20,8 @@ class MyUser(AbstractUser):
 class Account(models.Model):
     owner = models.OneToOneField(MyUser, verbose_name='account', on_delete=models.CASCADE)
     image = models.ImageField(upload_to=account_image_url, default=default_image_url, blank=True)
-    description = models.CharField(max_length=90, blank=True)
+    description = models.CharField(max_length=90, blank=True, 
+                                    default="Este es mi primer empleo en una compañía tan genial como Helpdesk.")
     facebook = models.URLField(blank=True)
     instagram = models.URLField(blank=True)
     twitter = models.URLField(blank=True)
@@ -45,11 +46,13 @@ class Rol(models.Model):
     is_regular = models.BooleanField(default=False)
     is_agent = models.BooleanField(default=False)
 
-    def check_user_role(self):
-        if self.user.is_regular:
+    def get_user_role(self):
+        if self.user.rol.is_regular:
             return 'Regular'
-        else:
+        elif self.user.rol.is_agent:
             return 'Agent'
+        else:
+            return f"No has asignado un rol"
 
     def __str__(self):
         if self.user.rol.is_regular:
