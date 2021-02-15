@@ -1,0 +1,53 @@
+{% extends 'helpdesk/base.html' %}
+{% load static %}
+
+{% block title %}{% endblock title %}
+{% block body %}
+
+{% include 'helpdesk/navbar.html' %}
+{% include 'helpdesk/header.html' %}
+<!-- [ Main Content ] start -->
+<div class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <!-- [ Main Content ] start -->
+                        <div class="row">
+                            <!-- [ sample-page ] start -->
+                            <div class="col-sm-12">
+                                <p class="logout_image" style="text-align: center;">
+                                    <img src="{% static '/images/logout_view.png' %}" alt="">
+                                </p>
+
+                            </div>
+                            <!-- [ sample-page ] end -->
+                        </div>
+
+                        <!-- [ Main Content ] end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer-fab">
+    <div class="b-bg">
+        <i class="fas fa-question"></i>
+    </div>
+    <div class="fab-hover">
+        <ul class="list-unstyled">
+            <li><a href="{% url 'helpdesk:index' %}" data-text="Inicio" class="btn btn-icon btn-rounded btn-info m-0"><i
+                        class="feather icon-home"></i></a></li>
+            <li><a href="{% url 'account:create' %}" data-text="Crear cuenta"
+                    class="btn btn-icon btn-rounded btn-primary m-0"><i class="feather icon feather icon-user"></i></a>
+            </li>
+            <li><a href="{% url 'account:login' %}" data-text="Volver a entrar"
+                    class="btn btn-icon btn-rounded btn-primary m-0"><i
+                        class="feather icon feather icon-user-plus"></i></a>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock body %}

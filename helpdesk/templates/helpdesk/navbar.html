@@ -1,0 +1,87 @@
+<nav class="pcoded-navbar menupos-fixed menu-light brand-blue ">
+    <div class="navbar-wrapper ">
+        <div class="navbar-brand header-logo">
+            <a href="index.html" class="b-brand">
+                <img src="/images/logo.svg" alt="" class="logo images">
+                <img src="/images/logo-icon.svg" alt="" class="logo-thumb images">
+            </a>
+            <a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
+        </div>
+        <div class="navbar-content scroll-div">
+            <ul class="nav pcoded-inner-navbar">
+                <li class="nav-item pcoded-menu-caption">
+                    <label>Bienvenid@{% if user.is_authenticated %}, {{user.username.title}}.</label>{% endif %}
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'helpdesk:index' %}" class="nav-link"><span class="pcoded-micon"><i
+                                class="feather icon-home"></i></span><span class="pcoded-mtext">Inicio</span></a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'helpdesk:helpdesk' %}" class="nav-link"><span class="pcoded-micon"><i
+                                class="feather icon-clipboard"></i></span><span
+                            class="pcoded-mtext">Dashboard</span></a>
+                </li>
+                <li class="nav-item pcoded-hasmenu">
+                    <a href="#!" class="nav-link"><span class="pcoded-micon"><i
+                                class="feather icon-user"></i></span><span class="pcoded-mtext">Cuenta</span></a>
+                    <ul class="pcoded-submenu">
+                        {% if user.is_anonymous %}
+                        <li class=""><a href="{% url 'account:create' %}" class="">Crear</a></li>
+                        <li class=""><a href="{% url 'account:login' %}" class="">Entrar</a></li>
+                        {% endif %}
+                        {% if user.is_authenticated %}
+                        <li class=""><a href="bc_button.html" class="">Elegir Rol</a></li>
+                        <li class=""><a href="{% url 'account:edit' %}" class="">Editar cuenta</a></li>
+                        <li class=""><a href="{% url 'account:logout' %}" class="">Cerrar Sesión</a></li>
+                        {% endif %}
+                </li>
+
+            </ul>
+            </li>
+
+            {% if user.is_authenticated %}
+            <li class="nav-item pcoded-menu-caption">
+                <label>Tickets</label>
+            </li>
+            <li class="nav-item pcoded-hasmenu">
+                <a href="#!" class="nav-link"><span class="pcoded-micon"><i
+                            class="feather icon-bookmark"></i></span><span class="pcoded-mtext">Opciones</span></a>
+                <ul class="pcoded-submenu">
+
+                    <li class=""><a href="bc_button.html" class="">Crear ticket</a></li>
+                    <li class=""><a href="bc_button.html" class="">Ver mis tickets</a></li>
+                    <li class=""><a href="bc_badges.html" class="">Crear comentario</a></li>
+            </li>
+            <li class=""><a href="bc_collapse.html" class="">Crear solicitud de vacaciones</a></li>
+            </ul>
+            </li>
+            {% else %}
+            <li class="nav-item pcoded-menu-caption">
+                <label>Tickets</label>
+            </li>
+            <li class="nav-item pcoded-hasmenu">
+                <a href="#!" class="nav-link"><span class="pcoded-micon"><i
+                            class="feather icon-bookmark"></i></span><span class="pcoded-mtext">Opciones</span></a>
+                <ul class="pcoded-submenu">
+                    <small class="nav-link">Necesitas una cuenta para interactuar con este panel. <a class="text-c-blue"
+                            href="{% url 'account:create' %}">Crear aquí.</a></small>
+                    <li class="nav-link">Crear ticket</li>
+                    <li class="nav-link">Ver mis tickets</li>
+                    <li class="nav-link">Crear comentario</li>
+                    <li class="nav-link">Crear solicitud de vacaciones</li>
+            </li>
+            </ul>
+            </li>
+            {% endif %}
+            <li class="nav-item pcoded-menu-caption">
+                <label>Créditos</label>
+            </li>
+            <li class="nav-item"><a href="https://www.amilkar.dev" target="_blank" class="nav-link"><span
+                        class="pcoded-micon"><i class="feather icon-sidebar"></i></span><span
+                        class="pcoded-mtext">Creado por Amilkar
+                        Munoz</span></a>
+            </li>
+            </ul>
+        </div>
+    </div>
+</nav>

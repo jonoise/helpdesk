@@ -1,0 +1,70 @@
+{% extends 'helpdesk/base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Account Creation{% endblock title %}
+
+{% block body %}
+<!-- [ auth-signup ] start -->
+<div class="auth-wrapper">
+    <div class="auth-content container">
+        <div class="card">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <img src="/static/images/helpdesk_logo_horizontal.png" alt="" class="img-fluid mb-4">
+                        <h4 class="mb-3 f-w-400">Log in</h4>
+                        <form method='post'>
+                            {% csrf_token %}
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="feather icon-user"></i></span>
+                                </div>
+                                {% render_field form.username class="form-control" placeholder="Usuario"%}
+                            </div>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="feather icon-lock"></i></span>
+                                </div>
+                                {% render_field form.password class="form-control" placeholder="Contraseña"%}
+                            </div>
+                            <input type='submit' class="btn btn-primary mb-4" value="Entrar">
+                        </form>
+                        {% if form.errors %}
+                        <div class="alert alert-danger">
+                            <strong>El usuario y/o la contraseña no hacen match.</strong>
+                        </div>
+                        {% endif %}
+                        <p class="mb-2">Aún no tienes una cuenta? <a href="{% url 'account:create' %}"
+                                class="f-w-400">Registrarme</a></p>
+                    </div>
+                </div>
+                <div class="col-md-6 d-none d-md-block">
+                    <img src="/static/images/auth-bg.jpg" alt="" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- [ auth-signup ] end -->
+
+<!-- Required Js -->
+<script src="/static/js/vendor-all.min.js"></script>
+<script src="/static/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+
+<div class="footer-fab">
+    <div class="b-bg">
+        <i class="fas fa-question"></i>
+    </div>
+    <div class="fab-hover">
+        <ul class="list-unstyled">
+            <li><a href="{% url 'helpdesk:index' %}" data-text="Inicio" class="btn btn-icon btn-rounded btn-info m-0"><i
+                        class="feather icon-home"></i></a></li>
+            <li><a href="{% url 'account:create' %}" data-text="Crear cuenta"
+                    class="btn btn-icon btn-rounded btn-primary m-0"><i class="feather icon feather icon-user"></i></a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+{% endblock body %}

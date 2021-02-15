@@ -1,0 +1,175 @@
+{% extends 'helpdesk/base.html' %}
+
+{% block title %}Dashboard{% endblock title %}
+
+{% block body %}
+<!-- [ navigation menu ] start -->
+{% include 'helpdesk/navbar.html' %}
+<!-- [ navigation menu ] end -->
+
+<!-- [ Header ] start -->
+{% include 'helpdesk/header.html' %}
+<!-- [ Header ] end -->
+
+<!-- [ Main Content ] start -->
+<div class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <!-- [ Main Content ] start -->
+                        <div class="row">
+                            <!-- product profit start -->
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card prod-p-card bg-c-red">
+                                    <div class="card-body">
+                                        <div class="row align-items-center m-b-30">
+                                            <div class="col">
+                                                <h6 class="m-b-5 text-white">Tickets Totales</h6>
+                                                <h1 class="m-b-0 text-white">{{user.tickets.count}}</h1>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-money-bill-alt text-c-red f-18"></i>
+                                            </div>
+                                        </div>
+                                        <p><a class="m-b-0 text-white" href="">Crear ticket</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card prod-p-card bg-c-blue">
+                                    <div class="card-body">
+                                        <div class="row align-items-center m-b-30">
+                                            <div class="col">
+                                                <h6 class="m-b-5 text-white">Comentarios</h6>
+                                                <h1 class="m-b-0 text-white">{{user.comments.count}}</h1>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fa fa-comment" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                        <p><a class="m-b-0 text-white" href="">Crear comentario</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card prod-p-card bg-c-green">
+                                    <div class="card-body">
+                                        <div class="row align-items-center m-b-30">
+                                            <div class="col">
+                                                <h6 class="m-b-5 text-white">Solicitudes</h6>
+                                                <h1 class="m-b-0 text-white">{{user.vacation_requests.count}}</h1>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-question text-c-green f-18"></i>
+                                            </div>
+                                        </div>
+                                        <p><a class="m-b-0 text-white" href="">Crear solicitud</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card prod-p-card bg-c-yellow">
+                                    <div class="card-body">
+                                        <div class="row align-items-center m-b-10">
+                                            <div class="col">
+                                                <h6 class="m-b-5 text-white">Vacaciones</h6>
+                                                <h1 class="m-b-0 text-white">{{user.vacations.count}}</h1>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-suitcase text-c-yellow f-18"></i>
+                                            </div>
+                                        </div>
+                                        .
+                                        <p><a class="m-b-0 text-white" href="">Ver vacaciones</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- product profit end -->
+                            <!-- sessions-section start -->
+                            <div class="col-xl-8 col-md-6">
+                                <div class="card table-card">
+                                    <div class="card-header">
+                                        <h5>Tickets</h5>
+                                    </div>
+                                    <div class="card-body px-0 py-0">
+                                        <div class="table-responsive">
+                                            <table class="table table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Ticket code</th>
+                                                        <th>Creado</th>
+                                                        <th>Actualizado</th>
+                                                        <th>Status</th>
+                                                        <th>Category</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for ticket in tickets %}
+                                                    <tr>
+                                                        <td>{{ticket.code}}</td>
+                                                        <td>{{ticket.created|date:'D j M, Y'}}</td>
+                                                        <td>{{ticket.updated|date:'g:i a'}}</td>
+                                                        <td>{{ticket.status.title}}</td>
+                                                        <td>{{ticket.category.title}}</td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- sessions-section end -->
+                            <div class="col-md-6 col-xl-4">
+                                <div class="card user-card">
+                                    <div class="card-header">
+                                        <h5>Cuenta</h5>
+                                    </div>
+                                    <div class="card-body  text-center">
+                                        <div class="usre-image">
+                                            <img src="{{user.account.image.url}}" class="img-radius wid-100 m-auto"
+                                                alt="User-Profile-Image">
+                                        </div>
+                                        <h6 class="f-w-600 m-t-25 m-b-10">{{user.first_name.title}}</h6>
+                                        <p>{{user.rol.get_user_role}}</p>
+                                        <div class="bg-c-blue counter-block m-t-10 p-20">
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <i class="fas fa-money-bill-alt text-white f-20"></i>
+                                                    <h6 class="text-white mt-2 mb-0">0</h6>
+                                                </div>
+                                                <div class="col-4">
+                                                    <i class="fas fa-comment text-white f-20"></i>
+                                                    <h6 class="text-white mt-2 mb-0">0</h6>
+                                                </div>
+                                                <div class="col-4">
+                                                    <i class="fas fa-suitcase text-white f-20"></i>
+                                                    <h6 class="text-white mt-2 mb-0">0</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="m-t-15">{{user.account.description}}</p>
+                                        <hr>
+                                        <div class="row justify-content-center user-social-link">
+                                            {% for nombre, link in user.account.social_links.items %}
+                                            <div class="col-auto"><a href="{{link}}"><i
+                                                        class="fab fa-{{nombre}} text-primary f-22"></i></a></div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- [ Main Content ] end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}

@@ -1,18 +1,32 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-{% load static %}
+
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/helpdesk.css' %}">
+    <!-- Favicon icon -->
+    <link rel="icon" href="./assets/images/favicon.ico" type="image/x-icon">
+    <!-- fontawesome icon -->
+    <link rel="stylesheet" href="{% static 'fonts/fontawesome/css/fontawesome-all.min.css' %}">
+    <!-- animation css -->
+    <link rel="stylesheet" href="{% static 'plugins/animation/css/animate.min.css' %}">
+
+    <!-- vendor css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>Helpdesk - {% block title %}{% endblock title %}</title>
 </head>
 
 <body>
     {% block body %}
     {% endblock body %}
+
+    <!-- Required Js -->
+    <script src="{% static 'js/vendor-all.min.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/pcoded.min.js' %}"></script>
 </body>
 
 </html>
