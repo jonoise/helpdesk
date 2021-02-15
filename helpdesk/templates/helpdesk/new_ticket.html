@@ -1,0 +1,41 @@
+{% extends 'helpdesk/base.html' %}
+{% load widget_tweaks %}
+
+
+{% block title %}{% endblock title %}
+{% block body %}
+
+{% include 'helpdesk/navbar.html' %}
+{% include 'helpdesk/header.html' %}
+<div class="pcoded-main-container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Editar cuenta</h3>
+                </div>
+                <div class="card-body">
+                    <div class="col-md-6">
+                        <form>
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label>Department</label>
+                                {% render_field form.department class="form-control" %}
+                                <small id="emailHelp" class="form-text text-muted">Escribe aquí una descripción que se
+                                    desplegará en tu Helpdesk.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Imagen</label>
+                                {% render_field form.image class="form-control"%}
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock body %}
