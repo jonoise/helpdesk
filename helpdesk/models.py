@@ -44,9 +44,9 @@ class Ticket(models.Model):
     code = models.CharField(
         max_length=12, default=get_random_string, unique=True)
     owner = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, related_name='tickets')
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='tickets')
     agent = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, related_name='assigned_tickets', blank=True, null=True)
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='assigned_tickets', blank=True, null=True)
     status = models.CharField(
         max_length=20, choices=STATUS_CHOICES, default="pending")
     created = models.DateTimeField(auto_now_add=True)
@@ -102,7 +102,7 @@ class Log(models.Model):
     ticket = models.ForeignKey(
         Ticket, on_delete=models.CASCADE, related_name='logs')
     date = models.DateTimeField(auto_now_add=True)
-    user = models.CharField(max_length=200)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='logs')
     header = models.CharField(max_length=200)
     body = models.TextField(blank=True)
 
