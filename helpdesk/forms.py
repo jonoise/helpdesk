@@ -4,7 +4,7 @@ from .models import Ticket, Comment, Attachment, VacationRequest
 class TicketForm(forms.ModelForm):
     class Meta:
         model = Ticket
-        fields = ('department', 'category', 'is_escalated', 'subject', 'description')
+        fields = ('owner', 'department', 'category', 'is_escalated', 'subject', 'description')
 
 class CommentForm(forms.ModelForm):
     class Meta:

@@ -44,7 +44,7 @@ class Ticket(models.Model):
     code = models.CharField(
         max_length=12, default=get_random_string, unique=True)
     owner = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='tickets')
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='tickets', null=True, blank=True)
     agent = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='assigned_tickets', blank=True, null=True)
     status = models.CharField(
@@ -60,6 +60,11 @@ class Ticket(models.Model):
     subject = models.CharField(max_length=200, help_text="Escribe un título.")
     description = models.TextField(
         blank=False, help_text="Describe cuál es el problema.")
+
+    # Ordena los Tickets de más reciente a más antiguo.
+    # El .first() element del QuerySet es el ticket más reciente.
+    class Meta:
+        ordering = ('-created',)
 
     def __str__(self):
         return f'code: {self.code} - date: {self.created}'
@@ -99,16 +104,13 @@ class Attachment(models.Model):
 
 
 class Log(models.Model):
-    ticket = models.ForeignKey(
-        Ticket, on_delete=models.CASCADE, related_name='logs')
-    date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='logs')
+    date = models.DateTimeField(auto_now_add=True)
     header = models.CharField(max_length=200)
     body = models.TextField(blank=True)
 
     def __str__(self):
-        return f'user: {self.user}, {self.ticket} - {self.date}'
-
+        return f'user: {self.user} - {self.date}'
 
 class VacationRequest(models.Model):
     owner = models.ForeignKey(
@@ -140,5 +142,3 @@ class Vacation(models.Model):
     
     def __str__(self):
         return f'owner: {self.owner} - {self.status}'
-    
-    

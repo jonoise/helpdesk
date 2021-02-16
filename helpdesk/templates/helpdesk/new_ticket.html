@@ -12,23 +12,35 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <h3>Editar cuenta</h3>
+                    <h3>Abrir ticket</h3>
                 </div>
                 <div class="card-body">
                     <div class="col-md-6">
-                        <form>
+                        <form method="post">
                             {% csrf_token %}
                             <div class="form-group">
-                                <label>Department</label>
+                                <label>Mi departamento:</label>
                                 {% render_field form.department class="form-control" %}
-                                <small id="emailHelp" class="form-text text-muted">Escribe aquí una descripción que se
-                                    desplegará en tu Helpdesk.</small>
                             </div>
                             <div class="form-group">
-                                <label for="">Imagen</label>
-                                {% render_field form.image class="form-control"%}
+                                <label for="">Categoría:</label>
+                                {% render_field form.category class="form-control"%}
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <div class="form-group">
+                                <label for="">Ya fue escalado?</label>
+                                {% render_field form.is_escalated class=""%}
+                                <small id="emailHelp" class="form-text text-muted">Marca esta casilla solamente si este
+                                    issue ya fue reportado previamente.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Subject</label>
+                                {% render_field form.subject class="form-control"%}
+                            </div>
+                            <div class="form-group">
+                                <label for="">Descripción</label>
+                                {% render_field form.description class="form-control"%}
+                            </div>
+                            <input type="submit" value="Enviar">
                         </form>
                     </div>
                 </div>

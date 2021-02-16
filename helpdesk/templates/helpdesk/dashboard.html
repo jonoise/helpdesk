@@ -105,7 +105,8 @@
                                                         <th>Creado</th>
                                                         <th>Actualizado</th>
                                                         <th>Status</th>
-                                                        <th>Category</th>
+                                                        <th>Categoría</th>
+                                                        <th>Detalles</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -116,6 +117,8 @@
                                                         <td>{{ticket.updated|date:'g:i a'}}</td>
                                                         <td>{{ticket.status.title}}</td>
                                                         <td>{{ticket.category.title}}</td>
+                                                        <td><a href="{{ticket.get_absolute_url}}">Ver</a>
+                                                        </td>
                                                     </tr>
                                                     {% endfor %}
                                                 </tbody>

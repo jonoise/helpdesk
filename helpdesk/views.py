@@ -26,24 +26,26 @@ def new_ticket(request):
     if request.method == 'POST':
         form = TicketForm(request.POST)
         if form.is_valid():
+            form = form.save(commit=False)
+            form.owner = request.user
             form.save()
-            return redirect('helpdesk:dashboard')
+            return redirect('helpdesk:helpdesk')
+    
+    return render(request, 'helpdesk/new_ticket.html', {'form':form})
 
 
 @login_required
 def ticket_detail(request, year, month, day, code):
-    ticket = get_object_or_404(Ticket(created__year=year,
+    ticket = get_object_or_404(Ticket, created__year=year,
                                       created__month=month,
                                       created__day=day,
-                                      code=code))
+                                      code=code)
     comments = ticket.comments.all()
-    logs = ticket.logs.all()
     attachments = ticket.attachments.all()
 
     context = {
         'ticket': ticket,
         'comments': comments,
-        'logs': logs,
     }
 
     return render(request, 'helpdesk/detail.html', context)

@@ -26,11 +26,12 @@
                                 class="feather icon-user"></i></span><span class="pcoded-mtext">Cuenta</span></a>
                     <ul class="pcoded-submenu">
                         {% if user.is_anonymous %}
-                        <li class=""><a href="{% url 'account:create' %}" class="">Crear</a></li>
+
                         <li class=""><a href="{% url 'account:login' %}" class="">Entrar</a></li>
+                        <li class=""><a href="{% url 'account:create' %}" class="">Registrarme</a></li>
                         {% endif %}
                         {% if user.is_authenticated %}
-                        <li class=""><a href="bc_button.html" class="">Elegir Rol</a></li>
+                        <li class=""><a href="{% url 'account:rol' %}" class="">Elegir Rol</a></li>
                         <li class=""><a href="{% url 'account:edit' %}" class="">Editar cuenta</a></li>
                         <li class=""><a href="{% url 'account:logout' %}" class="">Cerrar Sesión</a></li>
                         {% endif %}
@@ -48,7 +49,7 @@
                             class="feather icon-bookmark"></i></span><span class="pcoded-mtext">Opciones</span></a>
                 <ul class="pcoded-submenu">
 
-                    <li class=""><a href="bc_button.html" class="">Crear ticket</a></li>
+                    <li class=""><a href="{% url 'helpdesk:new_ticket' %}" class="">Crear ticket</a></li>
                     <li class=""><a href="bc_button.html" class="">Ver mis tickets</a></li>
                     <li class=""><a href="bc_badges.html" class="">Crear comentario</a></li>
             </li>
@@ -78,8 +79,8 @@
             </li>
             <li class="nav-item"><a href="https://www.amilkar.dev" target="_blank" class="nav-link"><span
                         class="pcoded-micon"><i class="feather icon-sidebar"></i></span><span
-                        class="pcoded-mtext">Creado por Amilkar
-                        Munoz</span></a>
+                        class="pcoded-mtext"><small>Creado por Amilkar
+                            Munoz</small></span></a>
             </li>
             </ul>
         </div>
