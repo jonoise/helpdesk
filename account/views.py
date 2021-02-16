@@ -4,7 +4,7 @@ from django.contrib import messages
 from .forms import MyUserCreationForm, RolForm, EditAccountForm
 from .models import MyUser, Account
 
-# Create your views here.
+
 
 def create_user(request):
     form = MyUserCreationForm()
@@ -51,9 +51,26 @@ def edit(request):
 
 @login_required()
 def user_rol(request):
-    form = RolForm(instance=request.user.account.rol)
+    if request.user.rol.is_agent:
+        form = RolForm(initial={'rol':'Agent'})
+    elif request.user.rol.is_regular:
+        form = RolForm(initial={'rol':'Regular'})
+    else:
+        form = RolForm()
     if request.method == 'POST':
         form = RolForm(request.POST)
         if form.is_valid():
-            form.save()
+            rol = form.cleaned_data['rol']
+            if rol == 'Agent':
+                request.user.rol.is_agent = True
+                request.user.rol.is_regular = False
+                request.user.rol.save()
+                
+            if rol == 'Regular':
+                request.user.rol.is_agent = False
+                request.user.rol.is_regular = True
+                request.user.rol.save()
+                
             return redirect('helpdesk:helpdesk')
+
+    return render(request, 'account/rol.html', {'form':form})

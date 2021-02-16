@@ -12,7 +12,10 @@ class EditAccountForm(forms.ModelForm):
         model = Account
         fields = ('image', 'description')
 
-class RolForm(forms.ModelForm):
-    class Meta:
-        model = Rol
-        fields = ("is_regular", "is_agent")
+class RolForm(forms.Form):
+    ROL_CHOICES = (
+        ('Regular', 'Regular'),
+        ('Agent', 'Agent'),
+    )
+
+    rol = forms.ChoiceField(choices=ROL_CHOICES, widget=forms.RadioSelect)

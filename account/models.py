@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractUser
 def account_image_url(self, *args, **kwargs):
     return f'account_images/{self.owner}/profile.png'
 
-def default_image_url(self, *args, **kwargs):
+def default_image_url():
     return f'account_images/account_default.png'
 
 class MyUser(AbstractUser):
