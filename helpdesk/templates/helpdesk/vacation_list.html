@@ -1,0 +1,83 @@
+{% extends 'helpdesk/base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Vacaciones{% endblock title %}
+
+{% block body %}
+{% include 'helpdesk/navbar.html' %}
+{% include 'helpdesk/header.html' %}
+
+<!-- [ Main Content ] start -->
+<div class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Lista de vacaciones.</h5>
+                                        <span class="d-block m-t-5">En esta lista podrás ver el estado de tus
+                                            vacaciones.</span>
+                                    </div>
+                                    <div class="card-body table-border-style">
+                                        <div class="table-responsive">
+                                            {% if vacations %}
+                                            <table class="table table-inverse">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Ticket</th>
+                                                        <th>Estado</th>
+                                                        <th>Desde</th>
+                                                        <th>Hasta</th>
+                                                        <th>Agente</th>
+                                                        <th>Mensaje</th>
+                                                    </tr>
+                                                </thead>
+                                                {% for vacation in vacations %}
+                                                <tbody>
+                                                    <tr class="vacation-{{vacation.status}}">
+                                                        <td>{{vacation.ticket.code}}</td>
+                                                        <td>{{vacation.status.title}}</td>
+                                                        <td>{{vacation.from_date}}</td>
+                                                        <td>{{vacation.to_date}}</td>
+                                                        {% if vacation.agent %}
+                                                        <td>{{vacation.agent.username.title}}</td>
+                                                        {% else %}
+                                                        <td>Asignando</td>
+                                                        {% endif %}
+                                                        {% if vacation.status == 'approved' %}
+                                                        <td>{{vacation.mensajito}}</td>
+                                                        {% elif vacation.status == 'pending' %}
+                                                        <td>Estamos trabajando para poder darte una respuesta lo antes
+                                                            posible :)</td>
+                                                        {% elif vacation.status == 'declined' %}
+                                                        <td>Lo lamentamos, {{ticket.owner}}. No pudimos hacer efectiva
+                                                            la solicitud.</td>
+                                                        {% endif %}
+                                                    </tr>
+                                                </tbody>
+                                                {% endfor %}
+                                            </table>
+                                            {% else %}
+                                            <!-- Si no hay va -->
+                                            <h5>No tienes solicitudes de vacaciones.</h5>
+                                            <p>Crea un tickete con la categoría "Vacaciones" para solicitud una
+                                                vacación: <a href="{% url 'helpdesk:new_ticket' %}">aquí</a>.</p>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock body %}

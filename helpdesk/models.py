@@ -2,7 +2,7 @@ from django.db import models
 from django.shortcuts import reverse
 from django.utils.crypto import get_random_string
 from django.conf import settings
-from .mensajitos import MENSAJITOS
+from .mensajitos import MENSAJITOS_APPROVED
 import random
 import datetime as dt
 
@@ -18,20 +18,20 @@ def attachments_upload_url(self, *args, **kwargs):
 class Ticket(models.Model):
 
     DEPARTMENT_CHOICES = (
-        ('front', 'Frontline'),
-        ('back', 'Back-office'),
-        ('wfm', 'Workforce'),
-        ('it', 'IT'),
-        ('management', 'Management'),
+        ('Frontline', 'Frontline'),
+        ('Back-office', 'Back-office'),
+        ('Workforce', 'Workforce'),
+        ('IT', 'IT'),
+        ('Management', 'Management'),
     )
 
     CATEGORY_CHOICES = (
-        ('reunion', 'Sala de Reuniones'),
-        ('ot', 'OT'),
-        ('vto', 'VTO'),
-        ('vacations', 'Vacaciones'),
-        ('medic', 'Cita Médica'),
-        ('insurance', 'Cita Aseguradora'),
+        ('Sala de Reuniones', 'Sala de Reuniones'),
+        ('OT', 'OT'),
+        ('VTO', 'VTO'),
+        ('Vacations', 'Vacaciones'),
+        ('Cita Médica', 'Cita Médica'),
+        ('Cita Aseguradora', 'Cita Aseguradora'),
     )
 
     STATUS_CHOICES = (
@@ -98,8 +98,7 @@ class Attachment(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     image = models.ImageField(upload_to=attachments_upload_url, blank=True)
-    file = models.FileField(upload_to=attachments_upload_url, blank=True)
-    description = models.TextField(
+    description = models.CharField(max_length=200,
         blank=False, help_text="Describe el propósito de la imagen.")
 
 
@@ -112,18 +111,6 @@ class Log(models.Model):
     def __str__(self):
         return f'user: {self.user} - {self.date}'
 
-class VacationRequest(models.Model):
-    owner = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='vacation_requests')
-    created = models.DateTimeField(auto_now_add=True, blank=True, null=True)
-    from_date = models.DateField(verbose_name="from")
-    to_date = models.DateField(verbose_name="to")
-    status = models.CharField(
-        max_length=20, choices=Ticket.STATUS_CHOICES, default="pending")
-    
-    def __str__(self):
-        return f'owner: {self.owner} - {self.status}'
-    
 
 class Vacation(models.Model):
     VACATION_STATUS = (
@@ -132,13 +119,20 @@ class Vacation(models.Model):
         ('declined', 'Declined'),
     )
 
+    ticket = models.ForeignKey(
+        Ticket, on_delete=models.CASCADE, related_name='vacations', blank=True)
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='vacations')
+    agent = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='vacations_assigned', blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True, blank=True, null=True)
-    from_date = models.DateField(verbose_name="from")
-    to_date = models.DateField(verbose_name="to")
+    from_date = models.DateField(verbose_name="from", default=dt.date.today)
+    to_date = models.DateField(verbose_name="to", default=dt.date.today)
     status = models.CharField(max_length=20, choices=VACATION_STATUS, default='pending')
-    mensajito = models.CharField(max_length=300, default=f''.join(random.choices(MENSAJITOS)))
+    mensajito = models.CharField(max_length=300, default=f''.join(random.choices(MENSAJITOS_APPROVED)))
     
+    class Meta:
+        ordering = ['-created']
+
     def __str__(self):
         return f'owner: {self.owner} - {self.status}'

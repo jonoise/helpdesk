@@ -1,8 +1,197 @@
 {% extends 'helpdesk/base.html' %}
+{% load widget_tweaks %}
 
 {% block title %}Detail{% endblock title %}
 
 {% block body %}
 {% include 'helpdesk/navbar.html' %}
 {% include 'helpdesk/header.html' %}
+
+
+<!-- [ Main Content ] start -->
+<div class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <!-- [ Main Content ] start -->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h5>Código del ticket: {{ticket.code}}</h5>
+                                <hr>
+                                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill"
+                                            href="#pills-home" role="tab" aria-controls="pills-home"
+                                            aria-selected="true">Ticket Info</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill"
+                                            href="#pills-profile" role="tab" aria-controls="pills-profile"
+                                            aria-selected="false">Comentarios</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="pills-contact-tab" data-toggle="pill"
+                                            href="#pills-contact" role="tab" aria-controls="pills-contact"
+                                            aria-selected="false">Attachments</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="pills-tabContent">
+                                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                                        aria-labelledby="pills-home-tab">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5>Información General</h5>
+                                                <hr class="mb-5">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <h6 class="mb-5"><span class='text-c-blue'>Creado</span>:
+                                                            {{ticket.created}}</h6>
+                                                        <h6 class="mb-5"><span class='text-c-blue'>Actualizado</span>:
+                                                            {{ticket.updated}}
+                                                        </h6>
+                                                        <h6 class="mb-5"><span class='text-c-blue'>Status</span>:
+                                                            {{ticket.status}}</h6>
+                                                        <!-- IF AGENT-->
+                                                        {% if ticket.agent %}
+                                                        <h6 class="mb-5"><span class='text-c-blue'>Agente
+                                                                asignado</span>: {{ticket.agent}}</h6>
+                                                        {% else %}
+                                                        <h6 class="mb-5"><span class='text-c-blue'>Agente
+                                                                asignado</span>: Sin asignar</h6>
+                                                        {% endif %}
+                                                        <!-- ENDIF -->
+                                                        <h6 class="mb-5"><span class='text-c-blue'>Anteriormente
+                                                                reportado?</span>:
+                                                            {{ticket.is_escalated}}</h6>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h6 class="mb-5"><span class='text-c-blue'>Dueño</span>:
+                                                            {{ticket.owner}}</h6>
+                                                        <h6 class="mb-5"><span class='text-c-blue'>Departamento</span>:
+                                                            {{ticket.department.title }}
+                                                        </h6>
+                                                        <h6 class="mb-5"><span class='text-c-blue'>Categoría</span>:
+                                                            {{ticket.category.title }}</h6>
+                                                        <h6 class="mb-5"><span class='text-c-blue'>Propósito</span>:
+                                                            {{ticket.subject}}</h6>
+                                                        <h6 class="mb-5"><span class='text-c-blue'>Detalles</span>:
+                                                            {{ticket.description}}</h6>
+                                                    </div>
+                                                </div>
+                                                <!-- sessions-section end -->
+                                            </div>
+                                            <!-- [ Main Content ] end -->
+                                        </div>
+
+                                        {% if user.rol.is_agent %}
+                                        <div class="card ">
+                                            <div class="card-header">
+                                                <h5>Decision Form</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <form
+                                                    action="{% url 'helpdesk:comment_handling' ticket.code request.user.pk %}"
+                                                    method='POST'>
+                                                    {% csrf_token %}
+                                                    <div class="form-group">
+                                                        <label for="formControlRange">Decide la vacación:</label>
+                                                        {% render_field vacation_decision_form.status class="form-control" %}
+                                                    </div>
+                                                    <input type="submit" value="Enviar">
+                                                </form>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+
+                                    </div>
+                                    <div class="tab-pane fade" id="pills-profile" role="tabpanel"
+                                        aria-labelledby="pills-profile-tab">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5>Chat (beta - leer más.)</h5>
+                                                <hr class="mb-5">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div id="chat_box" class="chat_box">
+                                                            <div class="message">
+                                                                {% if comments %}
+                                                                <hr>
+                                                                {% for comment in comments %}
+                                                                <div class="comment_box">
+                                                                    <p>{{comment.content}}</p>
+                                                                    <small>Enviado por: {{comment.owner}}
+                                                                        ({{comment.created}})
+                                                                    </small>
+                                                                    <p></p>
+                                                                </div>
+                                                                {% endfor %}
+                                                                {% else %}
+                                                                Este ticket aún no tiene comentarios.
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <form
+                                                            action="{% url 'helpdesk:comment_handling' ticket.code request.user.pk %}"
+                                                            method='POST'>
+                                                            {% csrf_token %}
+                                                            <div class="form-group">
+                                                                <label for="formControlRange">Escribe un
+                                                                    comentario:</label>
+                                                                {% render_field comment_form.content class="form-control" %}
+                                                            </div>
+                                                            <input type="submit" value="Enviar">
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="pills-contact" role="tabpanel"
+                                        aria-labelledby="pills-contact-tab">
+                                        <div class="row">
+                                            <div class="col-xl-12 col-md-6">
+                                                <!--ENCTYPE para los forms con imagenes-->
+                                                <form method='POST' enctype="multipart/form-data">
+                                                    {% csrf_token %}
+                                                    <div class="form-group">
+                                                        <label for="formControlRange">Selecciona un archivo:</label>
+                                                        {% render_field attachment_form.image class="form-control" %}
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="formControlRange">Descripción:</label>
+                                                        {% render_field attachment_form.description class="form-control" %}
+                                                    </div>
+                                                    <input class="form-group" type="submit" value="Enviar">
+                                                </form>
+                                            </div>
+                                            <div class="col-xl-3 col-md-6">
+                                                <h5>Attachments:</h5>
+                                                <div class="card prod-p-card">
+                                                    {% if attachments %}
+                                                    {% for attach in attachments %}
+                                                    <div class="card-body">
+                                                        <img id='attach_img' src="{{attach.image.url}}" alt="">
+                                                        {{attach.description}}
+                                                    </div>
+                                                    {% endfor %}
+                                                    {% else %}
+                                                    <h3>No hay attachments</h3>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock body %}

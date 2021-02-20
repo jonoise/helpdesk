@@ -1,14 +1,16 @@
 <nav class="pcoded-navbar menupos-fixed menu-light brand-blue ">
     <div class="navbar-wrapper ">
         <div class="navbar-brand header-logo">
+            <a href="index.html" class="b-brand">
+                <img src="/images/logo.svg" alt="" class="logo images">
+                <img src="/images/logo-icon.svg" alt="" class="logo-thumb images">
+            </a>
             <a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
         </div>
         <div class="navbar-content scroll-div">
             <ul class="nav pcoded-inner-navbar">
                 <li class="nav-item pcoded-menu-caption">
-                    <label>Bienvenid@{% if user.is_authenticated %}, {{user.username.title}}.</label> <label for="">Rol
-                        de cuenta: {{user.rol.get_user_role}}
-                    </label>{% endif %}
+                    <label>Bienvenid@{% if user.is_authenticated %}, {{user.username.title}}.</label>{% endif %}
                 </li>
                 <li class="nav-item">
                     <a href="{% url 'helpdesk:index' %}" class="nav-link"><span class="pcoded-micon"><i
@@ -46,10 +48,9 @@
                 <a href="#!" class="nav-link"><span class="pcoded-micon"><i
                             class="feather icon-bookmark"></i></span><span class="pcoded-mtext">Opciones</span></a>
                 <ul class="pcoded-submenu">
-
-                    <li class=""><a href="{% url 'helpdesk:new_ticket' %}" class="">Crear ticket</a></li>
-                    <li class=""><a href="{% url 'helpdesk:dashboard' %}" class="">Ver mis tickets</a></li>
-                    <li class=""><a href="{% url 'helpdesk:vacation_list' %}" class="">Ver mis vacaciones</a></li>
+                    <li class=""><a href="{% url 'helpdesk:unassigned' %}" class="">Tomar ticket</a></li>
+                    <li class=""><a href="bc_button.html" class="">Ver mis tickets</a></li>
+                    <li class=""><a href="bc_badges.html" class="">Crear comentario</a></li>
             </li>
             </ul>
             </li>

@@ -83,6 +83,42 @@ strong {
     font-weight: 400;
 }
 
+/* MIS ESTILOS */
+
+/* CHAT_BOX */
+
+.card-body .chat_box {
+    height: 300px;
+    overflow: auto;
+}
+
+.card-body .chat_box .comment_box {
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    background-color: rgba(0, 0, 0, 0.01);
+}
+
+/* ATTACH IMAGE */
+
+.card-body #attach_img {
+    width: 100%;
+    height: auto;
+}
+
+/* */
+.vacation-approved {
+    background: linear-gradient(45deg, #5bb63f, #14aa78) !important;
+}
+
+.vacation-pending {
+    background: linear-gradient(45deg, #d5d841, #d4b125) !important;
+}
+
+.vacation-declined {
+    background: linear-gradient(45deg, #b93434ee, #9e1e1ee5) !important;
+}
+
+/* ------------- FIN DE MIS ESTILOS --------------- */
+
 .logout_image img {
     width: 65%;
     height: auto;

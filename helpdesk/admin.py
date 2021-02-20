@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Ticket, Comment, Attachment, Log
+from .models import Ticket, Comment, Attachment, Log, Vacation
 
 
 # admin.site.register(Ticket)
@@ -14,3 +14,4 @@ class TicketAdmin(admin.ModelAdmin):
 admin.site.register(Comment)
 admin.site.register(Attachment)
 admin.site.register(Log)
+admin.site.register(Vacation)

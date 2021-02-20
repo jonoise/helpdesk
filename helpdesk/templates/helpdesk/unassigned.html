@@ -1,0 +1,75 @@
+{% extends 'helpdesk/base.html' %}
+
+{% block title %}Seleccionar Ticket{% endblock title %}
+
+
+
+
+{% block body %}
+<!-- ESTE ES UN TEMPLATE DE AGENTE - POR LO TANTO DEBE INCLUIR EL navbar_agent.html UBICADO EN helpdesk. -->
+{% include 'helpdesk/navbar_agent.html' %}
+{% include 'helpdesk/header.html' %}
+
+<!-- [ Main Content ] start -->
+<div class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Tickets sin asignar</h5>
+                                        <span class="d-block m-t-5">En esta lista podrás ver todos los tickets que no
+                                            han sido atendidos por un agente.</span>
+                                    </div>
+                                    <div class="card-body table-border-style">
+                                        <div class="table-responsive">
+                                            {% if tickets %}
+                                            <table class="table table-inverse">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Code</th>
+                                                        <th>Owner</th>
+                                                        <th>Estado</th>
+                                                        <th>Categoría</th>
+                                                        <th>Agente</th>
+                                                        <th>Asignar</th>
+                                                    </tr>
+                                                </thead>
+                                                {% for ticket in tickets %}
+                                                <tbody>
+                                                    <tr class="vacation-{{vacation.status}}">
+                                                        <td>{{ticket.code}}</td>
+                                                        <td>{{ticket.owner}}</td>
+                                                        <td>{{ticket.status.title}}</td>
+                                                        <td>{{ticket.category}}</td>
+                                                        <td>{{ticket.agent}}</td>
+                                                        <td><a href="{% url 'helpdesk:take_ticket' ticket.code %}">Tomar
+                                                                ticket</a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                                {% endfor %}
+                                            </table>
+                                            {% else %}
+                                            <!-- Si no hay va -->
+                                            <h5>Todos los tickets están asignados.</h5>
+                                            <p>Refresca la página :)</a></p>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock body %}

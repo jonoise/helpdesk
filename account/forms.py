@@ -10,7 +10,7 @@ class MyUserCreationForm(UserCreationForm):
 class EditAccountForm(forms.ModelForm):
     class Meta:
         model = Account
-        fields = ('image', 'description')
+        fields = ('image', 'description', 'facebook', 'instagram', 'twitter')
 
 class RolForm(forms.Form):
     ROL_CHOICES = (

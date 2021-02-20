@@ -1,10 +1,9 @@
 from django import forms
-from .models import Ticket, Comment, Attachment, VacationRequest
-
+from .models import Ticket, Comment, Attachment, Vacation
 class TicketForm(forms.ModelForm):
     class Meta:
         model = Ticket
-        fields = ('owner', 'department', 'category', 'is_escalated', 'subject', 'description')
+        fields = ('owner', 'agent', 'department', 'category', 'is_escalated', 'subject', 'description')
 
 class CommentForm(forms.ModelForm):
     class Meta:
@@ -14,11 +13,15 @@ class CommentForm(forms.ModelForm):
 class AttachmentForm(forms.ModelForm):
     class Meta:
         model = Attachment
-        fields = ('image', 'file', 'description')
+        fields = ('image', 'description')
 
 class VacationRequestForm(forms.ModelForm):
     class Meta:
-        model = VacationRequest
+        model = Vacation
         fields = ('from_date', 'to_date')
 
+class VacationDecisionForm(forms.ModelForm):
+    class Meta:
+        model = Vacation
+        fields = ('status',)
 

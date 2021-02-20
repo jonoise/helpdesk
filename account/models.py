@@ -43,7 +43,7 @@ class Account(models.Model):
 
 class Rol(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    is_regular = models.BooleanField(default=False)
+    is_regular = models.BooleanField(default=True)
     is_agent = models.BooleanField(default=False)
 
     def get_user_role(self):

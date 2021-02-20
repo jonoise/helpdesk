@@ -1,4 +1,3 @@
-from helpdesk.models import Log
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -14,14 +13,8 @@ def create_user(request):
     if request.method == 'POST':
         form = MyUserCreationForm(request.POST)
         if form.is_valid():
-            new_user = MyUser(
-                username = request.POST['username'],
-                password = request.POST['password2'],
-                first_name = request.POST['first_name'],
-            )
-            new_user.save()
-            message = messages.success(request, 'Usuario, creado')
-            return redirect('account:rol', messages=message)
+            form.save()
+            return redirect('account:rol')
 
     context = {
         'form':form
@@ -34,15 +27,14 @@ def login(request):
 
 @login_required
 def edit(request):
-    user = get_object_or_404(MyUser, username=request.user.username)
+    user = get_object_or_404(MyUser, pk=request.user.pk)
     form = EditAccountForm(instance=user.account)
     
     if request.method == 'POST':
-        form = EditAccountForm(request.POST)
+        form = EditAccountForm(request.POST, request.FILES, instance=user.account)
         if form.is_valid():
             form.save()
-
-            return redirect('helpdesk:helpdesk')
+            return redirect('helpdesk:dashboard')
 
     context = {
         'form':form
@@ -69,7 +61,7 @@ def user_rol(request):
                 request.user.rol.is_agent = True
                 request.user.rol.is_regular = False
                 request.user.rol.save()
-                rol_Log(rol, Log, request.user)
+                rol_Log(Log, request.user, rol)
                 
             if rol == 'Regular':
                 request.user.rol.is_agent = False
@@ -77,6 +69,6 @@ def user_rol(request):
                 request.user.rol.save()
                 rol_Log(Log, request.user, rol)
                 
-            return redirect('helpdesk:helpdesk')
+            return redirect('helpdesk:dashboard')
 
     return render(request, 'account/rol.html', {'form':form})
