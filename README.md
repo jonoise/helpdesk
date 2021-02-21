@@ -13,21 +13,21 @@ Esta es una imagen del Dashboard del proyecto, podemos ver que se listan los tic
 ___
 # Installation
 
--Clone this repository:
--Clona este repositorio:
+1. Clone this repository:
+1. Clona este repositorio:
 
 ```
 $ git clone https://github.com/soloamilkar/helpdesk
 ```
 
--Install requirements.txt within your virtual environment.
--Instala el archivos requirements.txt dentro de tu ambiente virtual.
+2.Install requirements.txt within your virtual environment.
+2.Instala el archivos requirements.txt dentro de tu ambiente virtual.
 
 ```
 $ pip install -r requirements.txt
 ```
 
--Runserver
+3.Runserver
 
 ```
 $ python manage.py runserver
