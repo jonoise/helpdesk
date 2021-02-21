@@ -20,14 +20,14 @@ ___
 $ git clone https://github.com/soloamilkar/helpdesk
 ```
 
-2.Install requirements.txt within your virtual environment.
-2.Instala el archivos requirements.txt dentro de tu ambiente virtual.
+2. Install requirements.txt within your virtual environment.
+2. Instala el archivos requirements.txt dentro de tu ambiente virtual.
 
 ```
 $ pip install -r requirements.txt
 ```
 
-3.Runserver
+3. Runserver
 
 ```
 $ python manage.py runserver
