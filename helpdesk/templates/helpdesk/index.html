@@ -5,9 +5,17 @@
 {% block title %}Home{% endblock title %}
 
 {% block body %}
+
+{% if user.rol.is_agent %}
+<!-- [ navigation menu ] start -->
+{% include 'helpdesk/navbar_agent.html' %}
+<!-- [ navigation menu ] end -->
+{% else %}
 <!-- [ navigation menu ] start -->
 {% include 'helpdesk/navbar.html' %}
 <!-- [ navigation menu ] end -->
+{% endif %}
+
 
 <!-- [ Header ] start -->
 {% include 'helpdesk/header.html' %}

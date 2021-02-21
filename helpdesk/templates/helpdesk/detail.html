@@ -4,9 +4,22 @@
 {% block title %}Detail{% endblock title %}
 
 {% block body %}
-{% include 'helpdesk/navbar.html' %}
-{% include 'helpdesk/header.html' %}
 
+
+{% if user.rol.is_agent %}
+<!-- [ navigation menu ] start -->
+{% include 'helpdesk/navbar_agent.html' %}
+<!-- [ navigation menu ] end -->
+{% else %}
+<!-- [ navigation menu ] start -->
+{% include 'helpdesk/navbar.html' %}
+<!-- [ navigation menu ] end -->
+{% endif %}
+
+
+<!-- [ Header ] start -->
+{% include 'helpdesk/header.html' %}
+<!-- [ Header ] end -->
 
 <!-- [ Main Content ] start -->
 <div class="pcoded-main-container">
@@ -19,6 +32,44 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <h5>Código del ticket: {{ticket.code}}</h5>
+                                {% if user.rol.is_agent %}
+                                <div class="card ">
+                                    <div class="card-header">
+                                        <h5>Estado del ticket</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form action="{% url 'helpdesk:ticket_decision_handling' ticket.code %}"
+                                            method='POST'>
+                                            {% csrf_token %}
+                                            <div class="form-group">
+                                                <label for="formControlRange">Cambia el estado del ticket para que el
+                                                    usuario pueda ver que estás trabajando en él, o ya lo
+                                                    cerraste.</label>
+                                                {% render_field ticket_decision_form.status class="form-control" %}
+                                            </div>
+                                            <input type="submit" value="Enviar">
+                                        </form>
+                                    </div>
+                                </div>
+                                {% if vacation %}
+                                <div class="card ">
+                                    <div class="card-header">
+                                        <h5>Vacation Decision Form</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form action="{% url 'helpdesk:vacation_decision_handling' ticket.code %}"
+                                            method='POST'>
+                                            {% csrf_token %}
+                                            <div class="form-group">
+                                                <label for="formControlRange">Decide la vacación:</label>
+                                                {% render_field vacation_decision_form.status class="form-control" %}
+                                            </div>
+                                            <input type="submit" value="Enviar">
+                                        </form>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% endif %}
                                 <hr>
                                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                                     <li class="nav-item">
@@ -84,27 +135,6 @@
                                             </div>
                                             <!-- [ Main Content ] end -->
                                         </div>
-
-                                        {% if user.rol.is_agent %}
-                                        <div class="card ">
-                                            <div class="card-header">
-                                                <h5>Decision Form</h5>
-                                            </div>
-                                            <div class="card-body">
-                                                <form
-                                                    action="{% url 'helpdesk:comment_handling' ticket.code request.user.pk %}"
-                                                    method='POST'>
-                                                    {% csrf_token %}
-                                                    <div class="form-group">
-                                                        <label for="formControlRange">Decide la vacación:</label>
-                                                        {% render_field vacation_decision_form.status class="form-control" %}
-                                                    </div>
-                                                    <input type="submit" value="Enviar">
-                                                </form>
-                                            </div>
-                                        </div>
-                                        {% endif %}
-
                                     </div>
                                     <div class="tab-pane fade" id="pills-profile" role="tabpanel"
                                         aria-labelledby="pills-profile-tab">

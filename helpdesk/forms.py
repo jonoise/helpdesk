@@ -25,3 +25,8 @@ class VacationDecisionForm(forms.ModelForm):
         model = Vacation
         fields = ('status',)
 
+class TicketDecisionForm(forms.ModelForm):
+    class Meta:
+        model = Ticket
+        fields = ('status',)
+

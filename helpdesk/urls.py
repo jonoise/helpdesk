@@ -19,8 +19,8 @@ urlpatterns = [
     path('comment-handling/<str:code>/<int:pk>/', views.comment_handling, name='comment_handling'),
     
     #ticket_decision_handling
-    path('ticket-decision-handling/<str:code>/<int:pk>/', views.ticket_decision_handling, name='ticket_decision_handling'),
+    path('ticket-decision-handling/<str:code>', views.ticket_decision_handling, name='ticket_decision_handling'),
     
     #vacation_decision_handling
-    path('vacation-decision-handling/<str:code>/<int:pk>/', views.vacation_decision_handling, name='vacation_decision_handling'),
+    path('vacation-decision-handling/<str:code>', views.vacation_decision_handling, name='vacation_decision_handling'),
 ]

@@ -4,7 +4,14 @@ from django.contrib.auth.decorators import login_required
 # Mis módulos
 from account.models import MyUser
 from .models import Ticket, Comment, Vacation
-from .forms import TicketForm, CommentForm, AttachmentForm, VacationRequestForm, VacationDecisionForm
+from .forms import (
+    TicketForm, 
+    CommentForm, 
+    AttachmentForm, 
+    VacationRequestForm, 
+    VacationDecisionForm, 
+    TicketDecisionForm
+)
 
 
 def index(request):
@@ -73,9 +80,14 @@ def ticket_detail(request, year, month, day, code):
             'attachment_form': attachment_form,
         }
 
-        if ticket.agent == user and len(ticket.vacations.all()) == 1:
-            vacation_decision_form = VacationDecisionForm()
-            context['vacation_decision_form'] = vacation_decision_form
+        if ticket.agent == user:
+            ticket_decision_form = TicketDecisionForm(instance=ticket)
+            context['ticket_decision_form'] = ticket_decision_form
+            if len(ticket.vacations.all()) == 1:
+                vacation = ticket.vacations.get(ticket__code=code)
+                vacation_decision_form = VacationDecisionForm(instance=vacation)
+                context['vacation_decision_form'] = vacation_decision_form
+                context['vacation'] = vacation
 
         if request.method == 'POST':
             form = AttachmentForm(request.POST, request.FILES)
@@ -107,7 +119,6 @@ def unassigned_tickets(request):
         return render(request, 'helpdesk/unassigned.html', {'tickets':tickets})
     else:
         return redirect('helpdesk:dashboard')
-
 
 @login_required
 def take_ticket(request, code):
@@ -159,10 +170,10 @@ def comment_handling(request, code, pk):
             return redirect('helpdesk:ticket_detail', ticket.created.year, ticket.created.month, ticket.created.day, ticket.code)
 
 @login_required
-def vacation_decision_handling(request, code, pk):
+def ticket_decision_handling(request, code):
     if request.method == 'POST':
         ticket = get_object_or_404(Ticket, code=code)
-        form = VacationDecisionForm(request.POST)
+        form = TicketDecisionForm(request.POST, instance=ticket)
         if form.is_valid():
             form.save()
             # Los argumentos extra son los necesarios para obtener
@@ -170,11 +181,11 @@ def vacation_decision_handling(request, code, pk):
             return redirect('helpdesk:ticket_detail', ticket.created.year, ticket.created.month, ticket.created.day, ticket.code)
 
 @login_required
-def ticket_decision_handling(request, code, pk):
+def vacation_decision_handling(request, code):
     if request.method == 'POST':
-        user = get_object_or_404(MyUser, pk=pk)
         ticket = get_object_or_404(Ticket, code=code)
-        form = VacationDecisionForm(request.POST)
+        vacation = ticket.vacations.get(ticket__code=code)
+        form = VacationDecisionForm(request.POST, instance=vacation)
         if form.is_valid():
             form.save()
             # Los argumentos extra son los necesarios para obtener

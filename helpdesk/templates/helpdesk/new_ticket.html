@@ -5,8 +5,20 @@
 {% block title %}{% endblock title %}
 {% block body %}
 
+{% if user.rol.is_agent %}
+<!-- [ navigation menu ] start -->
+{% include 'helpdesk/navbar_agent.html' %}
+<!-- [ navigation menu ] end -->
+{% else %}
+<!-- [ navigation menu ] start -->
 {% include 'helpdesk/navbar.html' %}
+<!-- [ navigation menu ] end -->
+{% endif %}
+
+
+<!-- [ Header ] start -->
 {% include 'helpdesk/header.html' %}
+<!-- [ Header ] end -->
 <div class="pcoded-main-container">
     <div class="row">
         <div class="col-sm-12">

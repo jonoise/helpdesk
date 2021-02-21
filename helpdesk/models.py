@@ -35,9 +35,9 @@ class Ticket(models.Model):
     )
 
     STATUS_CHOICES = (
-        ('pending', 'En espera'),
-        ('ongoing', 'En curso'),
-        ('closed', 'Cerrado'),
+        ('Pending', 'En espera'),
+        ('Ongoing', 'En curso'),
+        ('Closed', 'Cerrado'),
     )
 
     # Fields que el sistema va a llenar automáticamente.

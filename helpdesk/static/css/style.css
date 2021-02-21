@@ -106,15 +106,15 @@ strong {
 
 /* */
 .vacation-approved {
-    background: linear-gradient(45deg, #5bb63f, #14aa78) !important;
+    background: linear-gradient(45deg, #5bb63f9a, #14aa7870) !important;
 }
 
 .vacation-pending {
-    background: linear-gradient(45deg, #d5d841, #d4b125) !important;
+    background: linear-gradient(45deg, #d5d84191, #d4b12580) !important;
 }
 
 .vacation-declined {
-    background: linear-gradient(45deg, #b93434ee, #9e1e1ee5) !important;
+    background: linear-gradient(45deg, #b9343486, #9e1e1e85) !important;
 }
 
 /* ------------- FIN DE MIS ESTILOS --------------- */

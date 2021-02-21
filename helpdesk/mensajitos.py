@@ -3,9 +3,9 @@ MENSAJITOS_APPROVED = [
     'We got your back, {self.owner}! ;)',
     'Vuelve cuando puedas :)',
     'Te vamos a extrañar, {self.owner}. Disfruta tu tiempo offline :)',
-    '¡Vacaciones! Bien merecidas, {self.owner}',
-    '¡Vacaciones! Bien merecidas, {self.owner}',
-    '¡Vacaciones! Bien merecidas, {self.owner}',
+    '¡Vacaciones! Bien merecidas',
+    '¡Vacaciones! Bien merecidas',
+    '¡Vacaciones! Bien merecidas',
 ]
 
 MENSAJITOS_PENDING = [
