@@ -1,5 +1,5 @@
 # Helpdesk System (potencially!)
-Helpdesk system to manage tickets, comments, attachments and vacation (for now :P). Custom user models: Regulars (for regular employees) and Agents (for issue solver team member). The project was developed using Python and Django for the Backend♥ and using a Bootstrap template from google.
+Helpdesk system to manage tickets, comments, attachments and vacation (for now :P). Custom user models: Regulars (for regular employees) and Agents (for issue solver team member). The project was developed using Python and Django for the Backend♥ and using a Bootstrap template from google for the Frontend.
 
 ____
 ## Welcome to my Helpdesk System README.md ladies and gentlemen.
