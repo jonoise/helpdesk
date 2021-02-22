@@ -13,8 +13,8 @@ Esta es una imagen del Dashboard del proyecto, podemos ver que se listan los tic
 ___
 # Installation
 
-Create a new folder to foster this project and cd into the folder.
-Crea una nueva carpeta para albergar el proyecto y haz cd dentro de la carpeta.
+* Create a new folder to foster this project and cd into the folder and create a virtual environment and activate it.
+* Crea una nueva carpeta para albergar el proyecto y haz cd dentro de la carpeta y crea un ambiente virtual y actívalo.
 
 * Clone this repository:
 * Clona este repositorio:
