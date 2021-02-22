@@ -14,31 +14,26 @@ ___
 # Installation
 
 * Create a new folder to foster this project and cd into the folder and create a virtual environment and activate it.
-* Crea una nueva carpeta para albergar el proyecto y haz cd dentro de la carpeta y crea un ambiente virtual y actívalo.
 
 * Clone this repository:
-* Clona este repositorio:
 
 ```
 $ git clone https://github.com/soloamilkar/helpdesk
 ```
 
 * Install requirements.txt within your virtual environment.
-* Instala el archivos requirements.txt dentro de tu ambiente virtual.
 
 ```
 $ pip install -r requirements.txt
 ```
 
 * Run make migrations.
-* Corre hacer migraciones.
 
 ```
 python manage.py makemigrations
 ```
 
 * Run migrations.
-* Crea las migraciones.
 
 ```
 python manage.py migrate
