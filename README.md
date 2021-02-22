@@ -13,6 +13,9 @@ Esta es una imagen del Dashboard del proyecto, podemos ver que se listan los tic
 ___
 # Installation
 
+Create a new folder to foster this project and cd into the folder.
+Crea una nueva carpeta para albergar el proyecto y haz cd dentro de la carpeta.
+
 * Clone this repository:
 * Clona este repositorio:
 
@@ -25,6 +28,20 @@ $ git clone https://github.com/soloamilkar/helpdesk
 
 ```
 $ pip install -r requirements.txt
+```
+
+* Run make migrations.
+* Corre hacer migraciones.
+
+```
+python manage.py makemigrations
+```
+
+* Run migrations.
+* Crea las migraciones.
+
+```
+python manage.py migrate
 ```
 
 * Runserver
