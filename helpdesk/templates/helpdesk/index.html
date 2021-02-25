@@ -74,13 +74,66 @@
 									</div>
 									<div class="tab-pane fade" id="pills-profile" role="tabpanel"
 										aria-labelledby="pills-profile-tab">
-										<p class="mb-0">Ad pariatur nostrud pariatur exercitation ipsum ipsum culpa
-											mollit commodo mollit ex. Aute sunt incididunt amet commodo est sint
-											nisi deserunt pariatur do. Aliquip ex eiusmod voluptate
-											exercitation
-											cillum id incididunt elit sunt. Qui minim sit magna Lorem id et dolore
-											velit Lorem amet exercitation duis deserunt. Anim id labore elit
-											adipisicing ut in id occaecat pariatur ut ullamco ea tempor duis.
+										<p class="mb-0">
+											<table class="table table-bordered">
+												<thead>
+													<th>URLS Públicas</th>
+												</thead>
+												<tbody>
+													<tr>
+														<td><a href="{% url 'helpdesk:index' %}">Index</a></td>
+													</tr>
+													<tr>
+														<td><a href="{% url 'account:login' %}">Entrar</a></td>
+													</tr>
+													<tr>
+														<td><a href="{% url 'account:create' %}">Registrarme</a></td>
+													</tr>
+												</tbody>
+											</table>
+											<table class="table table-bordered">
+												<thead>
+													<th>URLS privadas (Se necesita estar logueado)</th>
+												</thead>
+												<tbody>
+													<tr>
+														<td><a href="{% url 'helpdesk:dashboard' %}">Dashboard</a></td>
+													</tr>
+													<tr>
+														<td><a href="{% url 'account:edit' %}">Editar Cuenta</a></td>
+													</tr>
+													<tr>
+														<td><a href="{% url 'account:rol' %}">Rol de Cuenta</a></td>
+													</tr>
+													<tr>
+														<td><a href="{% url 'helpdesk:new_ticket' %}">Nuevo Ticket</a>
+														</td>
+													</tr>
+													<tr>
+														<td><a href="#">Info del
+																Ticket</a> (Despliega un ticket sólo si eres el dueño o
+															el agente que lo va a trabajar.)</td>
+													</tr>
+													<tr>
+														<td><a href="{% url 'helpdesk:vacation_list' %}">Lista de
+																Vacaciones</a></td>
+													</tr>
+													<tr>
+														<td><a href="{% url 'helpdesk:new_ticket' %}">Petición de
+																Vacaciones</a> (Accedes a ella automáticamente tras
+															crear
+															un ticket con categoría "Vacaciones")</td>
+													</tr>
+													<tr>
+														<td><a href="{% url 'helpdesk:unassigned' %}">Tickets sin
+																asignar</a> (solo disponible para
+															agentes).</td>
+													</tr>
+													<tr>
+														<td><a href="{% url 'account:logout' %}">Logout</a></td>
+													</tr>
+												</tbody>
+											</table>
 										</p>
 									</div>
 									<div class="tab-pane fade" id="pills-contact" role="tabpanel"
