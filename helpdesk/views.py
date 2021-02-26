@@ -59,12 +59,15 @@ def new_ticket(request):
 
 @login_required
 def ticket_detail(request, year, month, day, code):
+    # Se obtienen las 2 principales piezas de información:
     user = request.user
     ticket = get_object_or_404(Ticket, created__year=year,
                                       created__month=month,
                                       created__day=day,
                                       code=code)
-
+    
+    # Se asegura que el usuario que intenta acceder a un ticket
+    # sea el owner o el agent asignado a ese ticket:
     if ticket.owner == user or ticket.agent == user:
         comments = ticket.comments.all()
         attachments = ticket.attachments.all()    
@@ -80,6 +83,9 @@ def ticket_detail(request, year, month, day, code):
             'attachment_form': attachment_form,
         }
 
+        
+        # Se agregan variables extras para renderizar SOLO
+        # si el usuario es agente:
         if ticket.agent == user:
             ticket_decision_form = TicketDecisionForm(instance=ticket)
             context['ticket_decision_form'] = ticket_decision_form
