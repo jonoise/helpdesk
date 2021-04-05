@@ -4,7 +4,7 @@ Helpdesk system to manage tickets, comments, attachments and vacation (for now :
 ____
 ## Welcome to my Helpdesk System README.md ladies and gentlemen.
 
-I'll be your host tonight! My name is Amilkar, i'm a ...what it is called? a "self-taught" software developer. More like a google-taught software developer. But yeah, basically I'm gonna cover general aspects of this project in this README so you can have it running in your desktop aswell. (There's a bit of spaggetti code in here so don't panic if you don't understand something... it is my fault, not yours! I commented the code when i tougth it was necessary (comments are in spanish tho lol, sorry for that)).
+I'll be your host tonight! My name is Amilkar, i'm a ...what it is called? a "self-taught" software developer. More like a google-taught software developer. But yeah, basically I'm gonna cover general aspects of this project in this README so you can have it running in your desktop aswell. I commented the code when i tougth it was necessary (comments are in spanish tho lol, sorry for that)).
 
 Esta es una imagen del Dashboard del proyecto, podemos ver que se listan los ticketes, las vacaciones pendientes y las aprobadas. También una lista con todos los tickets e información sobre ellos como un link para ver información más detallada. También podemos ver el navbar lateral con el que podemos navegar por la aplicación. 
 
